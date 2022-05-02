@@ -1,57 +1,88 @@
+.header {
+    background-color: black;
+    text-align: center;
+    width: 600px;
+    margin: 0 auto;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    border-bottom: none;
+}
+
+.header h1 {
+    margin: 0;
+    color: aqua;
+    padding: 10px;
+}
+
 .page {
   display: flex;
   height: 100vh;
   width: 100%;
   align-items: center;
-  background-color: #46516e;
   flex-direction: column;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    height: 500px;
-    max-height: 500px;
+    background-color: rgb(67, 63, 63);
+    height: 600px;
+    max-height: 600px;
     overflow: auto;
-    width: 400px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    padding-bottom: 10px;
-    margin-top: 25px;
+    width: 600px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    border-bottom: none;
+}
+
+.footer {
+    background-color: transparent;
+    position: absolute;
+    top: 650px;
 }
 
 .textarea {
-    width: 98%;
-    height: 100px;
-    border-radius: 10px;
-    margin-top: 10px;
+    width: 400px;
     padding-left: 10px;
-    padding-top: 10px;
-    font-size: 17px;
-    background-color: transparent;
-    border: 1px solid lightgray;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size: 25px;
+    background-color: rgb(67, 63, 63);
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
     outline: none;
-    color: lightgray;
+    color: aqua;
     letter-spacing: 1px;
     line-height: 20px;
+    resize: none;
 }
 
+::placeholder {
+    color: aqua;
+    font-size: 25px;
+  }
+
 .button {
-    background-color: pink;
-    width: 100%;
-    border: none;
-    height: 50px;
-    border-radius: 10px;
-    color: #46516e;
-    font-size: 17px;
+    background-color: rgb(67, 63, 63);
+    width: 188px;
+    height: 96px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    border-left: none;
+    color: aqua;
+    font-size: 25px;
+    position: relative;
+    top: -39.5px;
 }
 
 .button:hover {
-    background-color: red;
-}
-
-.form {
-    width: 400px;
+    background-color: rgb(30, 29, 29);
+    color: rgb(12, 208, 208);
+    cursor: pointer;
 }
 
 .MyRow {
@@ -62,14 +93,18 @@
 }
 
 .MyMessage {
-    width: 45%;
-    background-color: pink;
-    color: #46516e;
+    width: 40%;
+    background-color: black;
+    color: aqua;
     padding: 10px;
+    margin-left: 5px;
     margin-right: 5px;
     text-align: center;
-    border-top-right-radius: 10%;
-    border-bottom-right-radius: 10%;
+    border-style: solid;
+    border-color: aqua;
+    border-radius: 25px;
+    font-size: 25px;
+    margin-top: 10px;
 }
 
 .PartnerRow {
@@ -77,13 +112,16 @@
 }
 
 .PartnerMessage {
-    width: 45%;
-    background-color: transparent;
-    color: lightgray;
-    border: 1px solid lightgray;
+    width: 40%;
+    background-color: black;
+    color: aqua;
     padding: 10px;
     margin-left: 5px;
+    margin-right: 5px;
     text-align: center;
-    border-top-left-radius: 10%;
-    border-bottom-left-radius: 10%;
+    border-style: solid;
+    border-color: aqua;
+    border-radius: 25px;
+    font-size: 25px;
+    margin-top: 10px;
 }
