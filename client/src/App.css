@@ -29,7 +29,7 @@
     display: flex;
     flex-direction: column;
     background-color: rgb(67, 63, 63);
-    height: 600px;
+    height: 580px;
     max-height: 600px;
     overflow: auto;
     width: 600px;
@@ -40,13 +40,16 @@
 }
 
 .footer {
-    background-color: transparent;
-    position: absolute;
-    top: 650px;
+    display: inline-flex;
+}
+
+form {
+    display: inline-flex;
+    width: 100%;
 }
 
 .textarea {
-    width: 400px;
+    width: 358px;
     padding-left: 10px;
     padding-top: 25px;
     padding-bottom: 25px;
@@ -69,7 +72,7 @@
 
 .button {
     background-color: rgb(67, 63, 63);
-    width: 188px;
+    width: 150px;
     height: 96px;
     border-style: solid;
     border-width: 3px;
@@ -77,8 +80,6 @@
     border-left: none;
     color: aqua;
     font-size: 25px;
-    position: relative;
-    top: -39.5px;
 }
 
 .button:hover {
@@ -87,6 +88,26 @@
     cursor: pointer;
 }
 
+.img-button {
+    background-color: rgb(67, 63, 63);
+    width: 80px;
+    height: 96px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    border-right: none;
+    color: aqua;
+    font-size: 25px;
+}
+
+.img-button:hover {
+    background-color: rgb(30, 29, 29);
+    color: rgb(12, 208, 208);
+    cursor: pointer;
+}
+
+/*/
+/*/
 .MyRow {
     width: 100%;
     display: flex;
@@ -182,17 +203,27 @@ Mobile Styles
         border-left: none;
         border-right: none;
         height: 500px;
+        border-bottom: solid 3px;
     }
 
     .footer {
         width: 100%;
-        top: 565px;
     }
 
     .textarea {
         width: 70%;
-        border-left: none;
         box-sizing: border-box;
+        border-radius: none;
+        border-top: none;
+    }
+
+    .img-form {
+        width: 15%;
+    }
+
+    .img-button {
+        border-top: none;
+        width: 100%;
     }
 
     .button {
@@ -201,7 +232,9 @@ Mobile Styles
         border-style: solid;
         border-width: 3px;
         border-color: black;
+        border-top: none;
         border-right: none;
+        border-left: none;
     }
 }
 

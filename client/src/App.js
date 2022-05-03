@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import io from "socket.io-client";
+import { Camera, CameraResultType } from '@capacitor/camera';
 import './App.css';
 
 let socket;
@@ -41,6 +42,17 @@ const App = () => {
     setMessage('');
   }
 
+  function sendMedia(e) {
+    e.preventDefault();
+    const image = Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Base64
+    });
+
+
+  }
+
   function handleChange(e) {
     setMessage(e.target.value);
   }
@@ -68,10 +80,13 @@ const App = () => {
         })}
       </div>
       <div class="footer">
-      <form class="form" onSubmit={sendMessage}>
-        <textarea class="textarea" value={message} onChange={handleChange} placeholder="Say something..." required />
-        <button class="button">Send</button>
-      </form>
+        <form class="img-form" onSubmit={sendMedia}>
+          <button class="img-button">Img</button>
+        </form>
+        <form class="form" onSubmit={sendMessage}>
+          <textarea class="textarea" value={message} onChange={handleChange} placeholder="Say something..." required />
+          <button class="button">Send</button>
+        </form>
       </div>
     </div>
   );
