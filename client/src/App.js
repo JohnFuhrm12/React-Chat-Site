@@ -2,21 +2,27 @@ import React, {useState, useEffect, useRef} from "react";
 import io from "socket.io-client";
 import './App.css';
 
+let socket;
+
 const App = () => {
   const [yourID, setYourID] = useState();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const ENDPOINT = 'https://react-chat-jf12.herokuapp.com/'
 
   const socketRef = useRef();
 
   useEffect(() => {
+    socket = io(ENDPOINT, { transports: ['websocket', 'polling', 'flashsocket'] });
+    console.log(socket);
+
     socketRef.current = io.connect('/');
 
-    socketRef.current.on("your id", id => {
+    socket.on("your id", id => {
       setYourID(id);
     })
 
-    socketRef.current.on("message", (message) => {
+    socket.on("message", (message) => {
       receivedMessage(message);
     })
   }, []);
@@ -31,7 +37,7 @@ const App = () => {
       body: message,
       id: yourID,
     };
-    socketRef.current.emit("send message", messageObject);
+    socket.emit("send message", messageObject);
     setMessage('');
   }
 
