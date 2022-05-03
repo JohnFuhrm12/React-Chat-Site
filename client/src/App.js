@@ -68,10 +68,10 @@ const App = () => {
         })}
       </div>
       <div class="footer">
-        <form class="form" onSubmit={sendMessage}>
-          <textarea class="textarea" value={message} onChange={handleChange} placeholder="Say something..." required />
-          <button class="button">Send</button>
-        </form>
+      <form class="form" onSubmit={sendMessage}>
+        <textarea class="textarea" value={message} onChange={handleChange} placeholder="Say something..." required />
+        <button class="button">Send</button>
+      </form>
       </div>
     </div>
   );

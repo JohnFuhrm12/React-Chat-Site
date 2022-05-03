@@ -2,3 +2,7 @@ body {
     margin: 0;
     background-color: rgb(60, 58, 66);
 }
+
+html, body {
+	max-height: 100%;
+}
