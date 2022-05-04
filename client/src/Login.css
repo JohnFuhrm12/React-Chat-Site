@@ -1,0 +1,74 @@
+.login-header {
+    background-color: black;
+    text-align: center;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 200px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: aqua;
+    border-bottom: none;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.login-header h1 {
+    margin: 0;
+    color: aqua;
+    padding: 10px;
+    font-size: 60px;
+}
+
+.login-container {
+    background-color: black;
+    width: 600px;
+    padding-bottom: 100px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: aqua;
+    border-top: none;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.login-container form {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.login-container label {
+    font-size: 25px;
+    color: aqua;
+    margin-top: 20px;
+}
+
+.login-container input {
+    background-color: rgb(237, 228, 228);
+    font-size: 20px;
+    color: black;
+    margin-top: 20px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: aqua;
+}
+
+.login-container button {
+    font-size: 20px;
+    background-color: rgb(67, 63, 63);
+    color: aqua;
+    border-radius: 20px;
+    width: 150px;
+    height: 50px;
+    margin-top: 20px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: aqua;
+}
+
+.login-container button:hover {
+    background-color: rgb(30, 29, 29);
+}

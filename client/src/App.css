@@ -7,12 +7,32 @@
     border-width: 3px;
     border-color: black;
     border-bottom: none;
+    display: flex;
 }
 
 .header h1 {
     margin: 0;
     color: aqua;
     padding: 10px;
+    margin-left: 220px;
+    margin-right: 100px;
+}
+
+.logout {
+    font-size: 15px;
+    background-color: rgb(67, 63, 63);
+    color: aqua;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    margin-top: 8px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: aqua;
+}
+
+.logout:hover {
+    background-color: rgb(30, 29, 29);
 }
 
 /*/
@@ -106,6 +126,10 @@ form {
     cursor: pointer;
 }
 
+.clip {
+    width: 50px;
+}
+
 /*/
 /*/
 .MyRow {
@@ -116,13 +140,14 @@ form {
 }
 
 .MyMessage {
-    width: 40%;
+    min-width: 0%;
+    max-width: 60%;
     background-color: black;
     color: aqua;
     padding: 10px;
     margin-left: 5px;
     margin-right: 5px;
-    text-align: center;
+    text-align: left;
     border-style: solid;
     border-color: aqua;
     border-radius: 25px;
@@ -135,13 +160,14 @@ form {
 }
 
 .PartnerMessage {
-    width: 40%;
+    min-width: 0%;
+    max-width: 60%;
     background-color: black;
     color: aqua;
     padding: 10px;
     margin-left: 5px;
     margin-right: 5px;
-    text-align: center;
+    text-align: left;
     border-style: solid;
     border-color: aqua;
     border-radius: 25px;
@@ -215,15 +241,27 @@ Mobile Styles
         box-sizing: border-box;
         border-radius: none;
         border-top: none;
+        font-size: 20px;
     }
 
+    ::placeholder {
+        font-size: 20px;
+      }
+
     .img-form {
-        width: 15%;
+        width: 10%;
+        max-width: 10%;
+    }
+
+    .form {
+        width: 90%;
+        max-width: 90%;
     }
 
     .img-button {
+        box-sizing: border-box;
         border-top: none;
-        width: 100%;
+        border-left: none;
     }
 
     .button {
@@ -235,6 +273,19 @@ Mobile Styles
         border-top: none;
         border-right: none;
         border-left: none;
+        font-size: 20px;
+    }
+
+    .clip {
+        width: 30px;
+    }
+
+    .MyMessage {
+        font-size: 20px;
+    }
+
+    .PartnerMessage {
+        font-size: 20px;
     }
 }
 
