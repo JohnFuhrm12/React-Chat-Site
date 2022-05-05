@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useRef} from "react";
 import io from "socket.io-client";
 import { Camera, CameraResultType } from '@capacitor/camera';
-import './App.css';
+import useLocalStorage from "./useLocalStorage";
+import './Chat.css';
 
 let socket;
 
@@ -9,6 +10,7 @@ const Chat = () => {
   const [yourID, setYourID] = useState();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [name, setName] = useLocalStorage()
   const ENDPOINT = 'https://react-chat-jf12.herokuapp.com/'
 
   const socketRef = useRef();
@@ -51,6 +53,11 @@ const Chat = () => {
     });
   }
 
+  function handleLogout () {
+     setName('')
+     window.location.reload(false);
+  }
+
   function handleChange(e) {
     setMessage(e.target.value);
   }
@@ -59,17 +66,23 @@ const Chat = () => {
     <div class="page">
       <div class="header">
         <h1>React Chat</h1>
-        <button class="logout">Logout</button>
+        <button onClick={handleLogout} class="logout">Logout</button>
       </div>
       <div class="container">
         {messages.map((message, index) => {
           if (message.id === yourID) {
             return (
-              <div class="MyRow" key={index}> 
-                <div class="MyMessage">
-                  {message.body}
+              <div>
+                <div class="MyRow" key={index}> 
+                  <div class="MyMessage">
+                    {message.body}
+                  </div>
+                </div>
+                <div class="my-name">
+                  {name}
                 </div>
               </div>
+
             )
           }
           return (

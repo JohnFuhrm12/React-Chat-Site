@@ -8,7 +8,7 @@ const App = () => {
 
     return (
         <>
-            {name ? <Chat name={name} /> : <Login onNameSubmit={setName}/>}
+        {name==='' ? <Login onNameSubmit={setName} /> : <Chat name={name} onNameSubmit={setName}/>}
         </>
     )
 }

@@ -8,6 +8,7 @@ export default function Login( {onNameSubmit} ) {
       e.preventDefault();
 
       onNameSubmit(nameRef.current.value)
+      window.location.reload(false);
     }
   
     return (
