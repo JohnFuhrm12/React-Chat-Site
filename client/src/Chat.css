@@ -152,7 +152,6 @@ form {
     border-color: aqua;
     border-radius: 25px;
     font-size: 25px;
-    margin-top: 10px;
 }
 
 .my-name {
@@ -166,7 +165,10 @@ form {
 }
 
 .PartnerRow {
+    width: 100%;
+    display: flex;
     justify-content: flex-start;
+    margin-top: 10px;
 }
 
 .PartnerMessage {
@@ -232,6 +234,12 @@ Mobile Styles
         width: 100%;
         border-left: none;
         border-right: none;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header h1 {
+        margin-left: 25%;
     }
 
     .container {

@@ -72,3 +72,21 @@
 .login-container button:hover {
     background-color: rgb(30, 29, 29);
 }
+
+@media (max-width: 650px) {
+    .login-header {
+        width: 80%;
+    }
+
+    .login-container {
+        width: 80%;
+    }
+
+    .login-header h1 {
+        font-size: 45px;
+    }
+
+    .login-container label {
+        font-size: 20px;
+    }
+}
