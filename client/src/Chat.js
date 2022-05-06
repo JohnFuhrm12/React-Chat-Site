@@ -43,7 +43,7 @@ const Chat = () => {
     console.log(socket);
 
     const getDbmessages = async () => {
-      const data = await getDocs(messagesRef.orderBy('createdAt', "desc").limit(5));
+      const data = await getDocs(messagesRef.orderBy('createdAt', "desc").limit(20));
       setDbmessages(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
       console.log(data);
     };
