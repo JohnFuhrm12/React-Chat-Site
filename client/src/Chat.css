@@ -164,6 +164,16 @@ form {
     text-shadow: 0 0 8px black;
 }
 
+.other-name {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 5px;
+    margin-left: 20px;
+    color: aqua;
+    font-size: 20px;
+    text-shadow: 0 0 8px black;
+}
+
 .PartnerRow {
     width: 100%;
     display: flex;

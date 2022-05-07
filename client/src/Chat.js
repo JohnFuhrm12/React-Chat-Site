@@ -78,6 +78,7 @@ const Chat = () => {
       text: message,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       yourID,
+      name,
     })
 
     setMessage('');
@@ -110,13 +111,32 @@ const Chat = () => {
       </div>
       <div className="container">
         {dbmessages.slice().reverse().map((dbmessage) => {
-          return (
-          <div className="PartnerRow">
-            <div className="PartnerMessage">
-              {dbmessage.text}
+          if (name === dbmessage.name) {
+            return (
+              <div>
+                <div className="MyRow">
+                  <div className="MyMessage">
+                    {dbmessage.text}
+                  </div>
+              </div>
+              <div className="my-name">
+                {name}
+              </div>
             </div>
+            )
+          }
+          return (
+            <div>
+              <div className="PartnerRow">
+                <div className="PartnerMessage">
+                  {dbmessage.text}
+                </div>
+              </div>
+              <div className="other-name">
+                {dbmessage.name ? dbmessage.name : dbmessage.yourID}
+              </div>
           </div>
-          );
+          )
         })}
         {messages.map((message, index) => {
           if (message.id === yourID) {
