@@ -57,6 +57,7 @@
     border-width: 3px;
     border-color: black;
     border-bottom: none;
+    overflow-x: hidden;
 }
 
 .footer {
@@ -93,7 +94,7 @@ form {
 .button {
     background-color: rgb(67, 63, 63);
     width: 150px;
-    height: 96px;
+    height: 13vh;
     border-style: solid;
     border-width: 3px;
     border-color: black;
@@ -111,7 +112,7 @@ form {
 .img-button {
     background-color: rgb(67, 63, 63);
     width: 80px;
-    height: 96px;
+    height: 13vh;
     border-style: solid;
     border-width: 3px;
     border-color: black;
@@ -152,6 +153,7 @@ form {
     border-color: aqua;
     border-radius: 25px;
     font-size: 25px;
+    overflow-wrap: break-word;
 }
 
 .my-name {
@@ -195,6 +197,12 @@ form {
     border-radius: 25px;
     font-size: 25px;
     margin-top: 10px;
+    overflow-wrap: break-word;
+}
+
+.user-typing {
+    color: aqua;
+    margin-left: 5px;
 }
 
 /*/
@@ -246,6 +254,7 @@ Mobile Styles
         border-right: none;
         display: flex;
         justify-content: space-between;
+        height: 8vh;
     }
 
     .header h1 {
@@ -257,7 +266,8 @@ Mobile Styles
         width: 100%;
         border-left: none;
         border-right: none;
-        height: 500px;
+        height: 83vh;
+        max-height: 608.2px;
         border-bottom: solid 3px;
     }
 
@@ -266,11 +276,15 @@ Mobile Styles
     }
 
     .textarea {
-        width: 70%;
+        width: 80%;
         box-sizing: border-box;
         border-radius: none;
         border-top: none;
         font-size: 20px;
+        height: 9vh;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        overflow: hidden
     }
 
     ::placeholder {
@@ -291,10 +305,11 @@ Mobile Styles
         box-sizing: border-box;
         border-top: none;
         border-left: none;
+        height: 9vh;
     }
 
     .button {
-        width: 30%;
+        width: 20%;
         box-sizing: border-box;
         border-style: solid;
         border-width: 3px;
@@ -303,6 +318,7 @@ Mobile Styles
         border-right: none;
         border-left: none;
         font-size: 20px;
+        height: 9vh;
     }
 
     .clip {
@@ -315,6 +331,10 @@ Mobile Styles
 
     .PartnerMessage {
         font-size: 20px;
+    }
+
+    .user-typing {
+        font-size: 10px;
     }
 }
 

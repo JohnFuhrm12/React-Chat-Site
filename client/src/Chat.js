@@ -2,14 +2,12 @@ import React, {useState, useEffect, useRef} from "react";
 import io from "socket.io-client";
 import { Camera, CameraResultType } from '@capacitor/camera';
 import useLocalStorage from "./useLocalStorage";
+import debounce from "lodash/debounce";
 import './Chat.css';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { doc } from "firebase/firestore";
-import { UserSwitchOutlined } from "@ant-design/icons";
 import { getDocs } from "firebase/firestore";
 
 firebase.initializeApp({
@@ -21,7 +19,6 @@ firebase.initializeApp({
   appId: "1:690348767137:web:bbbc7ee75a5cf058193de0"
 })
 
-const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 let socket;
@@ -32,8 +29,10 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [name, setName] = useLocalStorage();
   const [dbmessages, setDbmessages] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
   const messagesRef = firestore.collection('messages');
   const scrollpoint = useRef();
+  const scrollpoint2 = useRef()
   const ENDPOINT = 'https://react-chat-jf12.herokuapp.com/'
 
   const socketRef = useRef();
@@ -70,6 +69,7 @@ const Chat = () => {
     const messageObject = {
       body: message,
       id: yourID,
+      username: name,
     };
 
     socket.emit("send message", messageObject);
@@ -92,6 +92,10 @@ const Chat = () => {
       allowEditing: true,
       resultType: CameraResultType.Base64
     });
+
+    var imageUrl = image.base64String;
+    console.log(imageUrl)
+ 
   }
 
   function handleLogout () {
@@ -99,8 +103,15 @@ const Chat = () => {
      window.location.reload(false);
   }
 
+  const handleIsTyping = debounce(function () {
+    setIsTyping(false);
+  }, 5000);
+
   function handleChange(e) {
     setMessage(e.target.value);
+    setIsTyping(true);
+    handleIsTyping();
+    console.log('change')
   }
 
   return (
@@ -133,7 +144,7 @@ const Chat = () => {
                 </div>
               </div>
               <div className="other-name">
-                {dbmessage.name ? dbmessage.name : dbmessage.yourID}
+                {dbmessage.name}
               </div>
           </div>
           )
@@ -150,18 +161,25 @@ const Chat = () => {
                 <div className="my-name">
                   {name}
                 </div>
-                <div className="scrol" ref={scrollpoint}></div>
+                <div className="scroll" ref={scrollpoint}></div>
               </div>
             )
           }
           return (
-            <div className="PartnerRow" key={index}>
-              <div className="PartnerMessage">
-                {message.body}
+            <div>
+              <div className="PartnerRow" key={index}>
+                <div className="PartnerMessage">
+                  {message.body}
+                </div>
               </div>
+              <div className="other-name">
+                {message.username}
+              </div>
+              <div className="scroll" ref={scrollpoint2}></div>
             </div>
           )
         })}
+      <span className="user-typing">{isTyping === true ? <h1>User Typing...</h1> : <h1></h1>}</span>
       </div>
       <div className="footer">
         <form className="img-form" onSubmit={sendImage}>
