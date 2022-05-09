@@ -18,7 +18,7 @@ export default function Login( {onNameSubmit} ) {
         </div>
         <div class="login-container">
           <form onSubmit={handleSubmit}>
-            <label>Enter Your Name</label>
+            <label>Enter Your Name:</label>
             <input type="text" ref={nameRef} required></input>
             <button type="submit">Login</button>
           </form>
