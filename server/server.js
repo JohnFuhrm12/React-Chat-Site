@@ -6,9 +6,11 @@ const socket = require("socket.io");
 const io = socket(server);
 const cors = require('cors');
 
+// Initialize Port or run on 8000
 const PORT = process.env.PORT || 8000;
 const router = require('./router');
 
+// Socket.io setup
 io.on("connection", socket => {
     socket.emit("your id", socket.id);
     socket.on("send message", body => {
