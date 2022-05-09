@@ -5,11 +5,13 @@ import useLocalStorage from "./useLocalStorage";
 import debounce from "lodash/debounce";
 import './Chat.css';
 
+// Firebase imports
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { getDocs } from "firebase/firestore";
 
+// Initialize Firebase Database
 firebase.initializeApp({
   apiKey: "AIzaSyCjmGw6wsKZ4iPtnyg_jpOIICWl_sFzwhk",
   authDomain: "react-chat-app-85a86.firebaseapp.com",
@@ -41,6 +43,7 @@ const Chat = () => {
     socket = io(ENDPOINT, { transports: ['websocket', 'polling', 'flashsocket'] });
     console.log(socket);
 
+    // Fetches 20 most recent messages from database displayed as most recent at bottom of list
     const getDbmessages = async () => {
       const data = await getDocs(messagesRef.orderBy('createdAt', "desc").limit(20));
       setDbmessages(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
@@ -72,6 +75,7 @@ const Chat = () => {
       username: name,
     };
 
+    // Emit message data to all users
     socket.emit("send message", messageObject);
 
     await messagesRef.add({
@@ -85,6 +89,7 @@ const Chat = () => {
     scrollpoint.current.scrollIntoView({ behavior: 'smooth' })
   }
 
+  // Select image and convert to url, needs to be uploaded to a database
   function sendImage(e) {
     e.preventDefault();
     const image = Camera.pickImages({
@@ -98,11 +103,13 @@ const Chat = () => {
  
   }
 
+  // Refresh page on logout to fix needing to press button 2x bug
   function handleLogout () {
      setName('')
      window.location.reload(false);
   }
 
+  // User typing message displayed for 5 seconds when change detected
   const handleIsTyping = debounce(function () {
     setIsTyping(false);
   }, 5000);
@@ -121,6 +128,7 @@ const Chat = () => {
         <button onClick={handleLogout} className="logout">Logout</button>
       </div>
       <div className="container">
+        {/* Displays all database messages */}
         {dbmessages.slice().reverse().map((dbmessage) => {
           if (name === dbmessage.name) {
             return (
@@ -149,6 +157,7 @@ const Chat = () => {
           </div>
           )
         })}
+        {/* Displays messages in realtime */}
         {messages.map((message, index) => {
           if (message.id === yourID) {
             return (

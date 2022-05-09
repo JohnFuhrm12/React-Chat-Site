@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 
 const PREFIX = 'react-chat-'
 
+// Fix an identification key to associate with each name and add names to local storage
 export default function useLocalStorage(key, initalValue) {
     const prefixedkey = PREFIX + key
     const [value, setValue] = useState(() => {
