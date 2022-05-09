@@ -4,4 +4,5 @@ A realtime chat application made with the React.js library and Socket.io. Messag
 Link to site: https://react-chat-jf12.netlify.app/
 
 
-![react](https://user-images.githubusercontent.com/61069716/166392668-000eed0e-54b7-4ae6-bfb0-0d38b06c6ff7.png)
+![reactchat2](https://user-images.githubusercontent.com/61069716/167323783-40423230-3f1b-4cbb-aded-1a8d8af9088d.png)
+
