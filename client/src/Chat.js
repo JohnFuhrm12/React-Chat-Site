@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useRef} from "react";
 import io from "socket.io-client";
-import { Camera, CameraResultType } from '@capacitor/camera';
 import useLocalStorage from "./useLocalStorage";
 import debounce from "lodash/debounce";
+import axios from "axios";
+import {Image} from 'cloudinary-react';
 import './Chat.css';
 
 // Firebase imports
@@ -26,6 +27,9 @@ const firestore = firebase.firestore();
 let socket;
 
 const Chat = () => {
+  const [imageUrl, setImageUrl] = useState();
+  const [imageSelected, setImageSelected] = useState("");
+  const [imageAwaiting, setImageAwaiting] = useState(false);
   const [yourID, setYourID] = useState();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -65,7 +69,7 @@ const Chat = () => {
 
   function receivedMessage(message) {
     setMessages(oldMsgs => [...oldMsgs, message]);
-  }
+  };
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -87,27 +91,13 @@ const Chat = () => {
 
     setMessage('');
     scrollpoint.current.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  // Select image and convert to url, needs to be uploaded to a database
-  function sendImage(e) {
-    e.preventDefault();
-    const image = Camera.pickImages({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Base64
-    });
-
-    var imageUrl = image.base64String;
-    console.log(imageUrl)
- 
-  }
+  };
 
   // Refresh page on logout to fix needing to press button 2x bug
   function handleLogout () {
      setName('')
      window.location.reload(false);
-  }
+  };
 
   // User typing message displayed for 5 seconds when change detected
   const handleIsTyping = debounce(function () {
@@ -119,7 +109,43 @@ const Chat = () => {
     setIsTyping(true);
     handleIsTyping();
     console.log('change')
-  }
+  };
+
+  // Uploads images to Cloudify database
+  const uploadImage = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", imageSelected);
+    formData.append("upload_preset", "ReactChatJF12");
+
+    axios.post("https://api.cloudinary.com/v1_1/dvmw658s9/image/upload", formData).then((response) => {
+      console.log(response);
+      setImageUrl(response.data.url);
+    });
+
+    console.log(imageUrl);
+
+    const messageObject = {
+      body: imageUrl,
+      id: yourID,
+      username: name,
+      media: true,
+    };
+
+    // Emit message data to all users
+    socket.emit("send message", messageObject);
+
+    await messagesRef.add({
+      text: imageUrl,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      yourID,
+      name,
+      media: true,
+    })
+
+    setImageSelected("");
+    setImageAwaiting(false);
+  };
 
   return (
     <div className="page">
@@ -135,7 +161,7 @@ const Chat = () => {
               <div>
                 <div className="MyRow">
                   <div className="MyMessage">
-                    {dbmessage.text}
+                    {dbmessage.media ? <img className="img-message" src={dbmessage.text}/> : dbmessage.text}
                   </div>
               </div>
               <div className="my-name">
@@ -148,7 +174,7 @@ const Chat = () => {
             <div>
               <div className="PartnerRow">
                 <div className="PartnerMessage">
-                  {dbmessage.text}
+                  {dbmessage.media ? <img className="img-message" src={dbmessage.text}/> : dbmessage.text}
                 </div>
               </div>
               <div className="other-name">
@@ -164,7 +190,7 @@ const Chat = () => {
               <div>
                 <div className="MyRow" key={index}> 
                   <div className="MyMessage">
-                    {message.body}
+                    {message.media ? <img className="img-message" src={message.body}/> : message.body}
                   </div>
                 </div>
                 <div className="my-name">
@@ -178,7 +204,7 @@ const Chat = () => {
             <div>
               <div className="PartnerRow" key={index}>
                 <div className="PartnerMessage">
-                  {message.body}
+                  {message.media ? <img className="img-message" src={message.body}/> : message.body}
                 </div>
               </div>
               <div className="other-name">
@@ -187,16 +213,25 @@ const Chat = () => {
               <div className="scroll" ref={scrollpoint2}></div>
             </div>
           )
-        })}
-      <span className="user-typing">{isTyping === true ? <h1>User Typing...</h1> : <h1></h1>}</span>
+          })}
+          {imageAwaiting ? <Image className="img-message" cloudName="dvmw658s9" publicID={imageUrl}/> : <div></div>}
       </div>
       <div className="footer">
-        <form className="img-form" onSubmit={sendImage}>
-          <button className="img-button"><img className="clip" src={require("./clip.png")} alt="paperclip" /></button>
-        </form>
+        <label className="img-button" for='inputTag'><img className="clip" src={require("./clip.png")} alt="paperclip" />
+          <input 
+          id="inputTag"
+          className="img-input"
+          type='file'
+          onChange={(event) => {
+            setImageSelected(event.target.files[0]);
+            setImageAwaiting(true);
+          }}
+          />
+        </label>
         <form className="form" onSubmit={sendMessage}>
           <textarea className="textarea" value={message} onChange={handleChange} placeholder="Say something..." required />
           <button className="button">Send</button>
+          {imageAwaiting ? <button className="button" onClick={uploadImage}>Send-IMG</button> : <div></div>}
         </form>
       </div>
     </div>

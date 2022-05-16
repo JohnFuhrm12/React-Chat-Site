@@ -9,7 +9,7 @@ const App = () => {
 
     return (
         <>
-        {name==='' ? <Login onNameSubmit={setName} /> : <Chat name={name} onNameSubmit={setName}/>}
+        {name==='' || name == null ? <Login onNameSubmit={setName} /> : <Chat name={name} onNameSubmit={setName}/>}
         </>
     )
 }
