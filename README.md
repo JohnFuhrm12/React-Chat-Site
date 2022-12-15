@@ -1,5 +1,5 @@
 # React-Chat-Site
-A realtime chat application made with the React.js library and Socket.io. Messages are saved using Firebase as a database. Client side deployed using Netlify and server side deployed with Heroku.
+A realtime chat application made with the React.js library and Socket.io. Messages are saved using Firebase as a database. Client side deployed using Netlify and server side deployed with Render.
 
 Link to site: https://react-chat-jf12.netlify.app/
 
