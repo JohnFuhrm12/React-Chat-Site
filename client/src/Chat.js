@@ -39,7 +39,7 @@ const Chat = () => {
   const messagesRef = firestore.collection('messages');
   const scrollpoint = useRef();
   const scrollpoint2 = useRef()
-  const ENDPOINT = 'https://react-chat-jf12.herokuapp.com/'
+  const ENDPOINT = 'https://reactchatserver.onrender.com/'
 
   const socketRef = useRef();
 
